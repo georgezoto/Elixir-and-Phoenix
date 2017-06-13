@@ -17,8 +17,11 @@ Concepts learned:
 13) Websockets in Phoenix
 
 References:  
+https://elixir-lang.org  
+http://www.phoenixframework.org  
 https://github.com/StephenGrider/ElixirCode  
 https://www.udemy.com/the-complete-elixir-and-phoenix-bootcamp-and-tutorial  
+https://github.com/doomspork/elixir-companies
 https://quiet-lake-82310.herokuapp.com
 
 ![alt text](images/Elixir-and-Phoenix.png)
