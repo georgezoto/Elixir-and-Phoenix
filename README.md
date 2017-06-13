@@ -1,5 +1,5 @@
 # Elixir-and-Phoenix
-Elixir and Phoenix applications based on Udemy class taught by Stephen Grider.
+Elixir and Phoenix applications based on a great Udemy class taught by Stephen Grider.
 
 References:  
 https://github.com/StephenGrider/ElixirCode  
