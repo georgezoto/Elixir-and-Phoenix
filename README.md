@@ -20,3 +20,4 @@ Concepts learned:
 12) Transforming Requests with Plugs
 13) Websockets in Phoenix
 
+![alt text](/Users/Guest/Downloads/Elixir-and-Phoenix.png)
