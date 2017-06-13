@@ -1,10 +1,6 @@
 # Elixir-and-Phoenix
 Elixir and Phoenix applications based on a great Udemy class taught by Stephen Grider.
 
-References:  
-https://github.com/StephenGrider/ElixirCode  
-https://www.udemy.com/the-complete-elixir-and-phoenix-bootcamp-and-tutorial  
-
 Concepts learned:
 1) An Elixir Warmup
 2) Elixir's Amazing Pattern Matching
@@ -19,5 +15,9 @@ Concepts learned:
 11) Handling Authentication with OAuth
 12) Transforming Requests with Plugs
 13) Websockets in Phoenix
+
+References:  
+https://github.com/StephenGrider/ElixirCode  
+https://www.udemy.com/the-complete-elixir-and-phoenix-bootcamp-and-tutorial  
 
 ![alt text](images/Elixir-and-Phoenix.png)

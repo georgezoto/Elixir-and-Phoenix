@@ -1,6 +1,13 @@
 # Cards
 
-**TODO: Add description**
+A cards application exploring functional programming in Elixir with the following functions:  
+create_deck/0  
+shuffle/1  
+contains/2  
+deal/2  
+save/2  
+load/1  
+create_hand/1  
 
 ## Installation
 
