@@ -1,6 +1,6 @@
 # Identicon
 
-An identicon application exploring functional programming in Elixir with the following functions:
+An identicon application exploring functional programming in Elixir with the following functions:  
 main/1  
 save_image/2  
 draw_image/1  
