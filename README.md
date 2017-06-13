@@ -2,8 +2,8 @@
 Elixir and Phoenix applications based on Udemy class taught by Stephen Grider.
 
 References:
-*https://github.com/StephenGrider/ElixirCode
-*https://www.udemy.com/the-complete-elixir-and-phoenix-bootcamp-and-tutorial
+https://github.com/StephenGrider/ElixirCode  
+https://www.udemy.com/the-complete-elixir-and-phoenix-bootcamp-and-tutorial  
 
 Concepts learned:
 1) An Elixir Warmup
