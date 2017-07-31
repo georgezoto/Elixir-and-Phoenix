@@ -2,6 +2,10 @@ defmodule Discuss.TopicController do
   use Discuss.Web, :controller
   alias Discuss.Topic
 
+  def index(conn, _params) do
+  
+  end 
+
   def new(conn, _params) do
     #IO.puts "++++"
     #IO.inspect conn
@@ -15,11 +19,11 @@ defmodule Discuss.TopicController do
   def create(conn, %{"topic" => topic}) do
     changeset = Topic.changeset(%Topic{}, topic)
 
-    #Database insertion
     case Repo.insert(changeset) do
       {:ok, post} -> IO.inspect(post)
       {:error, changeset} -> 
         render conn, "new.html", changeset: changeset
     end
-  end 
+  end
+ 
 end
