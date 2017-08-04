@@ -25,3 +25,4 @@ https://github.com/doomspork/elixir-companies
 https://quiet-lake-82310.herokuapp.com  
 
 ![alt text](images/Elixir-and-Phoenix.png)
+![alt text](images/Discuss Application.png)
