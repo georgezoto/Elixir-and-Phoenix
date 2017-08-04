@@ -52,4 +52,14 @@ defmodule Discuss.TopicController do
     end
   end
 
+  def delete(conn, %{"id" => topic_id}) do
+    #Same as delete/2 but returns the struct or raises if the changeset is invalid
+    Repo.get!(Topic, topic_id) |> Repo.delete!
+
+    conn
+    |> put_flash(:info, "Topic Deleted")
+    |> redirect(to: topic_path(conn, :index)) 
+    end
+  end
+
 end
