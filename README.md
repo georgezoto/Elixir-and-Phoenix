@@ -25,4 +25,7 @@ https://github.com/doomspork/elixir-companies
 https://quiet-lake-82310.herokuapp.com  
 
 ![alt text](images/Elixir-and-Phoenix.png)
+
+A sample application where a user can create, edit, update or delete a topic:
+
 ![alt text](images/Discuss-Application.png)
