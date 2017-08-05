@@ -9,7 +9,12 @@
 
     <title>Hello Discuss!</title>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+
+    <!--Materialize is a modern responsive CSS framework based on Material Design by Google.-->
+    <!--http://materializecss.com-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css">
+    <!--Material icons are beautifully crafted, delightful, and easy to use in your web, Android, and iOS projects.-->
+    <!--https://material.io/icons-->
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
 
