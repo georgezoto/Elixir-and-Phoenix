@@ -3,6 +3,7 @@ defmodule Discuss.TopicController do
   alias Discuss.Topic
 
   def index(conn, _params) do
+    #Fetches all entries from the data store matching the given query
     topics = Repo.all(Topic) 
     render conn, "index.html", topics: topics 
   end 
@@ -20,6 +21,13 @@ defmodule Discuss.TopicController do
   def create(conn, %{"topic" => topic}) do
     changeset = Topic.changeset(%Topic{}, topic)
 
+    #Inserts a struct or a changeset.
+    #In case a struct is given, the struct is converted into a changeset 
+    #with all non-nil fields as part of the changeset.
+    #In case a changeset is given, the changes in the changeset are merged 
+    #with the struct fields, and all of them are sent to the database.
+    #It returns {:ok, struct} if the struct has been successfully inserted 
+    #or {:error, changeset} if there was a validation or a known constraint error.
     case Repo.insert(changeset) do
       {:ok, _topic} -> 
         conn
@@ -31,6 +39,7 @@ defmodule Discuss.TopicController do
   end
 
   def edit(conn, %{"id" => topic_id}) do
+    #Fetches a single struct from the data store where the primary key matches the given id.
     topic = Repo.get(Topic, topic_id)
     changeset = Topic.changeset(topic)
 
@@ -42,6 +51,13 @@ defmodule Discuss.TopicController do
     old_topic = Repo.get(Topic, topic_id)
     changeset = Topic.changeset(old_topic, topic)
 
+    #Updates a changeset using its primary key.
+    #A changeset is required as it is the only mechanism for tracking dirty changes. 
+    #Only the fields present in the changes part of the changeset are sent to the database. 
+    #Any other, in-memory changes done to the schema are ignored.
+    #If the struct has no primary key, Ecto.NoPrimaryKeyFieldError will be raised.
+    #It returns {:ok, struct} if the struct has been successfully updated or 
+    #{:error, changeset} if there was a validation or a known constraint error.
     case Repo.update(changeset) do
       {:ok, _topic} -> 
         conn
@@ -53,6 +69,7 @@ defmodule Discuss.TopicController do
   end
 
   def delete(conn, %{"id" => topic_id}) do
+    #Deletes a struct using its primary key.
     #Same as delete/2 but returns the struct or raises if the changeset is invalid
     Repo.get!(Topic, topic_id) |> Repo.delete!
 
