@@ -26,6 +26,15 @@ defmodule Discuss.Router do
     resources "/", TopicController
   end
 
+  scope "/auth", Discuss do
+    pipe_through :browser # Use the default browser stack
+
+    #route called when a user wants to authenticate with github
+    get "/:provider", AuthController, :request
+    #route called when a user is sent back from github to our application
+    get "/:provider/callback", AuthController, :callback
+  end
+
   # Other scopes may use custom stacks.
   # scope "/api", Discuss do
   #   pipe_through :api
