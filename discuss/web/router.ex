@@ -34,6 +34,9 @@ defmodule Discuss.Router do
     get "/:provider", AuthController, :request
     #route called when a user is sent back from github to our application
     get "/:provider/callback", AuthController, :callback
+
+    #route called when a users wants to sign out
+    get "/signout", AuthController, :signout
   end
 
   # Other scopes may use custom stacks.

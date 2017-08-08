@@ -39,4 +39,11 @@ defmodule Discuss.AuthController do
     end
   end
 
+  #Function to delete any user information in the current session
+  def signout(conn, _params) do
+    conn
+    |> configure_session(drop: true)
+    |> redirect(to: topic_path(conn, :index))
+  end
+
 end
