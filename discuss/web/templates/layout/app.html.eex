@@ -19,16 +19,27 @@
   </head>
 
   <body>
-    <nav class="light blue"> 
+    <nav class="light blue">
       <div class="nav-wrapper container">
         <a href="/" class="brand-logo">
-	  Discussions
-	</a>
+	         Discussions
+	      </a>
+        <ul class="right">
+          <%= if @conn.assigns[:user] do %>
+            <li>
+              Logout
+            </li>
+          <% else %>
+            <li>
+              <%= link "Sign in with GitHub", to: auth_path(@conn, :request, "github") %>
+            </li>
+          <% end %>
+        </ul>
       </div>
     </nav>
-    
+
     <div class="container">
-    
+
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
