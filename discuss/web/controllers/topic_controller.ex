@@ -2,6 +2,9 @@ defmodule Discuss.TopicController do
   use Discuss.Web, :controller
   alias Discuss.Topic
 
+  #Flow through the RequireAuth plug prior to these actions using the guard clause
+  plug Discuss.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete]
+
   def index(conn, _params) do
     IO.inspect(conn.assigns)
     #Fetches all entries from the data store matching the given query
