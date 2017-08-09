@@ -23,7 +23,15 @@ defmodule Discuss.TopicController do
   end
 
   def create(conn, %{"topic" => topic}) do
-    changeset = Topic.changeset(%Topic{}, topic)
+    #changeset = Topic.changeset(%Topic{}, topic)
+    #Associating a topic with a user
+    #Take current user,
+    #build an assoc with the topic he is creating,
+    #create a Topic struct,
+    #create a changeset!
+    changeset = conn.assigns.user
+      |> build_assoc(:topics)
+      |> Topic.changeset(topic)
 
     #Inserts a struct or a changeset.
     #In case a struct is given, the struct is converted into a changeset
