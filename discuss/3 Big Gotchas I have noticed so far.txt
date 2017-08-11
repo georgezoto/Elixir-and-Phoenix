@@ -1,0 +1,109 @@
+Hello Stephen and Udemy Community,
+
+First of all, great job on this class Stephen, I am glad you're detail oriented like many of us here.
+
+I wanted to write down 3 gotchas I have recently discovered related to Lecture 116. This is a long message so get a cup of hot chocolate and let's go!
+
+As this point the application looks pretty neat, it has authentication with login and logout features as well as checks to make sure that only a user who created a topic can edit it or delete it. But, I wonder if anyone in the community noticed or can comment on the following:
+
+
+
+Gotcha #1) If you try to edit someone else's topic, you will not be allowed to and instead will be redirected to the main page by the function plug (check_topic_owner) in the topic controller. However, what do you think will happen if you try to edit a random topic by entering the id in the url for example as: http://localhost:4000/22/edit. Comments or thoughts ?
+
+Well, if you look at the definition of edit/2 in the topic controller, there is no check really being done after fetching a topic_id using Repo. So you should get an error like:
+
+[error] #PID<0.582.0> running Discuss.Endpoint terminated
+
+Request: GET /22/edit
+
+    ** (UndefinedFunctionError) function nil.user_id/0 is undefined or private
+
+Notice that I couldn't check this for deleting a random topic, it seems like the resources helper function used in router.ex is preventing us from seeing the complete url to delete a topic. According to the Restful API convention, DELETE '/topics/22' is the suggested http verb to use, and from a browser you cannot really issue such a command. Comments or thoughts on how to check this (using a programing language like python or bash is a way, i am sure elixir has a way too). I wonder what the result of trying to delete a random topic would be ?
+
+
+
+Gotcha #2) Uploading your code on GitHub. I highly recommend you do this as you are going through the class. It's a great way to build your development portfolio (see mine for example: under georgezoto in GitHub). Doing a google search on how to protect your api keys, environment variables is one of doing it (#client_id: System.get_env("GITHUB_CLIENT_ID"). I was also thinking of putting them in a separate file (e.g /config/prod.secret.exs), adding this file in .gitignore and simply using the imported file throughout the project. Does anyone recommend any good implementations of these options or some other option ?
+
+
+
+Gotcha #3) The biggest gotcha of I've seen so far!!! In the end of Lecture 116 where you are checking if you have the option to edit or delete another user's topics, I tried something very simple that I had tried all along since the login button was introduced. I logged out. Boy what a mistake... Before I share my thoughts, what do you think might have happened... Well, this happened to me:
+
+[error] #PID<0.660.0> running Discuss.Endpoint terminated
+
+Request: GET /
+
+** (exit) an exception was raised:
+
+    ** (UndefinedFunctionError) function nil.id/0 is undefined or private
+
+It looks similar to the error we saw in Gotcha #2) but look closer. It says it cannot render the main page (route "/") because nil.id/0 is undefined. This took me some time for figure out so I will give you a hint. Let's just look at our database and 2 tables in postgres:
+
+\l
+
+ Guest       | Guest    | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+
+ discuss_dev | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+
+ postgres    | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+
+
+
+\connect discuss_dev
+
+You are now connected to database "discuss_dev" as user "Guest".
+
+\dt
+
+ public | schema_migrations | table | postgres
+
+ public | topics            | table | postgres
+
+ public | users             | table | postgres
+
+
+
+select * from users;
+
+  2 | my email here | github   | some random number here | 2017-08-09 03:52:02.358578 | 2017-08-09 03:52:02.515162
+
+
+
+select * from topics;
+
+ 23 | Great JS Frameworks         |       2
+
+ 24 | Postgres in Action (NEW)    |       2
+
+ 25 | Elixir Points of Discussion |       2
+
+ 26 | Javascript for dinner       |       2
+
+ 27 | Elixir and Phoenix          |       2
+
+ 28 | Postgres for All!           |       2
+
+As you can see I have only myself as a user, and I am the sole creator of each topic, that is until I upload this application on heroku and ask my friends to take it for a spin. The last sentence implies that I cannot logout! Not only that but I cannot log back in either. The only way to forcefully get back in is by issuing localhost:4000/auth/github in the url! But why ? Looking at the topic controller, only creating a topic, editing or deleting it requires us to be authenticated:
+
+  plug Discuss.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete]
+
+The function :index responsible for rendering the main page is free to go, anyone who has access to our url can see it. That is what I would expect anyway... Let's think about that last sentence, I feel we are getting closer to the root cause. Is :index really free to go and show us all our topics? Let's look at index.html.ex which does the actual rendering of the main page.
+
+Aha! What in the world ? <%= if @conn.assigns.user.id == topic.user_id do %>
+
+The same code we put to hide or show the edit and delete links of our topics is actually breaking the logout functionality. That's because a user who has not logged in is nil. So the left hand side of the check @conn.assigns.nil.id is undefined. Something interesting I noticed in the lecture though.
+
+In Lecture 116, at time 2:47, you can see Stephen's page with No visible Edit and Delete links for first topic (with id 3). Looking at time 11:10,  topic with id 3 has has null for user_id. For some reason I can't seem to replicate this. So how do we fix this ? Can I add a user with nil id in my database? Let's try:
+
+update topics set user_id=1020 where id=23;
+
+ERROR:  insert or update on table "topics" violates foreign key constraint "topics_user_id_fkey"
+
+The mystery continues. Comments or thoughts on a) how to add a user with nil id in postgres and b) what do you suggest we do to fix in order for logout to render the main page correctly ?
+
+
+
+Take a step back and relax. This post (or topic as Stephen would correct himself) is a long one. I really appreciate your time and feedback.
+
+Thank you,
+
+George Zoto
