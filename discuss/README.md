@@ -19,6 +19,6 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
 
-A sample application where a user can create, edit, update or delete a topic:
+A sample application where a user can login and logout, create, edit, update or delete a topic:
 
 ![alt text](../images/Discuss-Application.png)
