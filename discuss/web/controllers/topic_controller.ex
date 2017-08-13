@@ -10,6 +10,7 @@ defmodule Discuss.TopicController do
   def index(conn, _params) do
     IO.inspect("index(conn, _params)")
     IO.inspect(conn.assigns)
+    
     #Fetches all entries from the data store matching the given query
     topics = Repo.all(Topic)
     render conn, "index.html", topics: topics
@@ -51,6 +52,7 @@ defmodule Discuss.TopicController do
 
   def edit(conn, %{"id" => topic_id}) do
     IO.inspect("edit(conn, %{id => topic_id})")
+
     #Fetches a single struct from the data store where the primary key matches the given id.
     topic = Repo.get(Topic, topic_id)
     if topic do
