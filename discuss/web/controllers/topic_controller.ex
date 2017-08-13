@@ -8,6 +8,7 @@ defmodule Discuss.TopicController do
   plug :check_topic_owner when action in [:edit, :update, :delete]
 
   def index(conn, _params) do
+    IO.inspect("index(conn, _params)")
     IO.inspect(conn.assigns)
     #Fetches all entries from the data store matching the given query
     topics = Repo.all(Topic)
@@ -49,11 +50,18 @@ defmodule Discuss.TopicController do
   end
 
   def edit(conn, %{"id" => topic_id}) do
+    IO.inspect("edit(conn, %{id => topic_id})")
     #Fetches a single struct from the data store where the primary key matches the given id.
     topic = Repo.get(Topic, topic_id)
-    changeset = Topic.changeset(topic)
-
-    render conn, "edit.html", changeset: changeset, topic: topic
+    if topic do
+      changeset = Topic.changeset(topic)
+      render conn, "edit.html", changeset: changeset, topic: topic
+    else
+      conn
+      |> put_flash(:info, "You cannot edit that")
+      |> redirect(to: topic_path(conn, :index))
+      |> halt()
+    end
   end
 
   def update(conn, %{"id" => topic_id, "topic" => topic}) do
@@ -91,14 +99,25 @@ defmodule Discuss.TopicController do
   def check_topic_owner(conn, _params) do
     %{params: %{"id" => topic_id}} = conn
 
-    if Repo.get(Topic, topic_id).user_id == conn.assigns.user.id do
-      conn
+    topic = Repo.get(Topic, topic_id)
+    if topic do
+
+      if Repo.get(Topic, topic_id).user_id == conn.assigns.user.id do
+        conn
+      else
+        conn
+        |> put_flash(:error, "You cannot edit that")
+        |> redirect(to: topic_path(conn, :index))
+        |> halt()
+      end
+
     else
       conn
       |> put_flash(:error, "You cannot edit that")
       |> redirect(to: topic_path(conn, :index))
       |> halt()
     end
+
   end
 
 end
