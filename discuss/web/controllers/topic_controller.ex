@@ -58,7 +58,6 @@ defmodule Discuss.TopicController do
 
     #Fetches a single struct from the data store where the primary key matches the given id.
     topic = Repo.get(Topic, topic_id)
-    IO.inspect(topic)
 
     if topic do
       render conn, "show.html", topic: topic
