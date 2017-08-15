@@ -10,7 +10,7 @@ defmodule Discuss.TopicController do
   def index(conn, _params) do
     IO.inspect("index(conn, _params)")
     IO.inspect(conn.assigns)
-    
+
     #Fetches all entries from the data store matching the given query
     topics = Repo.all(Topic)
     render conn, "index.html", topics: topics
@@ -29,6 +29,7 @@ defmodule Discuss.TopicController do
     #build an assoc with the topic he is creating,
     #create a Topic struct,
     #create a changeset!
+
     changeset = conn.assigns.user
       |> build_assoc(:topics)
       |> Topic.changeset(topic)
@@ -40,6 +41,7 @@ defmodule Discuss.TopicController do
     #with the struct fields, and all of them are sent to the database.
     #It returns {:ok, struct} if the struct has been successfully inserted
     #or {:error, changeset} if there was a validation or a known constraint error.
+
     case Repo.insert(changeset) do
       {:ok, _topic} ->
         conn
@@ -78,6 +80,7 @@ defmodule Discuss.TopicController do
     #If the struct has no primary key, Ecto.NoPrimaryKeyFieldError will be raised.
     #It returns {:ok, struct} if the struct has been successfully updated or
     #{:error, changeset} if there was a validation or a known constraint error.
+    
     case Repo.update(changeset) do
       {:ok, _topic} ->
         conn
