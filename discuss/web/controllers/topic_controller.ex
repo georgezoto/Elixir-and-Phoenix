@@ -58,8 +58,10 @@ defmodule Discuss.TopicController do
 
     #Fetches a single struct from the data store where the primary key matches the given id.
     topic = Repo.get(Topic, topic_id)
+    IO.inspect(topic)
+
     if topic do
-      render conn, "index.html", topics: topic
+      render conn, "show.html", topic: topic
     else
       conn
       |> put_flash(:info, "You cannot view that")
