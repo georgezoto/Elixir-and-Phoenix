@@ -52,6 +52,22 @@ defmodule Discuss.TopicController do
     end
   end
 
+  def show(conn, %{"id" => topic_id}) do
+    IO.inspect("show(conn, %{id => topic_id})")
+    IO.inspect(topic_id)
+
+    #Fetches a single struct from the data store where the primary key matches the given id.
+    topic = Repo.get(Topic, topic_id)
+    if topic do
+      render conn, "index.html", topics: topic
+    else
+      conn
+      |> put_flash(:info, "You cannot view that")
+      |> redirect(to: topic_path(conn, :index))
+      |> halt()
+    end
+  end
+
   def edit(conn, %{"id" => topic_id}) do
     IO.inspect("edit(conn, %{id => topic_id})")
 
@@ -80,7 +96,7 @@ defmodule Discuss.TopicController do
     #If the struct has no primary key, Ecto.NoPrimaryKeyFieldError will be raised.
     #It returns {:ok, struct} if the struct has been successfully updated or
     #{:error, changeset} if there was a validation or a known constraint error.
-    
+
     case Repo.update(changeset) do
       {:ok, _topic} ->
         conn
