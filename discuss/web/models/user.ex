@@ -7,6 +7,8 @@ defmodule Discuss.User do
     field :token, :string
     #A User has_many Topics described by Discuss.Topic
     has_many :topics, Discuss.Topic
+    #A User has_many Comments described by Discuss.Comments
+    has_many :comments, Discuss.Comments
 
     timestamps()
   end

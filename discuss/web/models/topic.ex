@@ -5,6 +5,8 @@ defmodule Discuss.Topic do
     field :title, :string
     #A Topic belongs_to one User described by Discuss.User
     belongs_to :user, Discuss.User
+    #A Topic has_many Comments described by Discuss.Comments
+    has_many :comments, Discuss.Comments
   end
 
   def changeset(struct, params \\ %{}) do
