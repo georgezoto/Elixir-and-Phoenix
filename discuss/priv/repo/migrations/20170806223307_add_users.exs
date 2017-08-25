@@ -1,7 +1,7 @@
 defmodule Discuss.Repo.Migrations.AddUsers do
   use Ecto.Migration
 
-  #Create table users
+  #Create users table 
   def change do
     create table(:users) do
       add :email, :string
