@@ -24,7 +24,7 @@ select * from topics;
 """
 
 @doc """
-\d topics
+\d topics;
                                  Table "public.topics"
  Column  |          Type          |                      Modifiers
 ---------+------------------------+-----------------------------------------------------
