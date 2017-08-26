@@ -3,6 +3,11 @@ defmodule Discuss.UserSocket do
 
   ## Channels
   # channel "room:*", Discuss.RoomChannel
+  #Channels handle events from clients, so they are similar to Controllers,
+  #but there are two key differences. Channel events can go both directions - incoming and outgoing.
+  #Channel connections also persist beyond a single request/response cycle.
+  #Channels are the highest level abstraction for realtime communication components in Phoenix.
+
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
