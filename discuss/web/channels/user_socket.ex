@@ -7,7 +7,8 @@ defmodule Discuss.UserSocket do
   #but there are two key differences. Channel events can go both directions - incoming and outgoing.
   #Channel connections also persist beyond a single request/response cycle.
   #Channels are the highest level abstraction for realtime communication components in Phoenix.
-
+  #Each Channel will implement one or more clauses of each of these four callback functions -
+  #join/3, terminate/2, handle_in/3, and handle_out/3.
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
