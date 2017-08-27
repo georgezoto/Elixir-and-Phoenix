@@ -1,6 +1,6 @@
 defmodule Discuss.CommentsChannel do
   use Discuss.Web, :channel
-  alias Discuss.{Topic, Comments}
+  alias Discuss.{Topic, Comment}
 
   #To authorize the socket to join a topic, we return {:ok, socket} or {:ok, reply, socket}.
   #"topic:subtopic"
@@ -30,6 +30,10 @@ defmodule Discuss.CommentsChannel do
     IO.puts(name)
     IO.inspect(content)
     IO.inspect(socket)
+    topic = socket.assigns.topic
+    IO.inspect(topic)
+
+
 
     {:reply, :ok, socket}
   end
