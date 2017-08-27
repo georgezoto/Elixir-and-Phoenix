@@ -3,6 +3,7 @@
 <ul class="collection">
     <li class="collection-item">
       <%= @topic.title %>
+      <button>Ping!</button>
 
       <%= if @conn.assigns.user do %>
         <%= if @conn.assigns.user.id == @topic.user_id do %>
