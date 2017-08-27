@@ -20,4 +20,5 @@ import "phoenix_html"
 
 //We need to make sure web/static/js/socket.js gets imported into our application javascript file.
 //To do that, uncomment the last line in web/static/js/app.js.
-import socket from "./socket"
+//import socket from "./socket"
+import "./socket"
