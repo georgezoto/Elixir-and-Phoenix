@@ -2,7 +2,7 @@ defmodule Discuss.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  channel "room:*", Discuss.CommentsChannel
+  channel "comments:*", Discuss.CommentsChannel
 
   #Channels handle events from clients, so they are similar to Controllers,
   #but there are two key differences. Channel events can go both directions - incoming and outgoing.
