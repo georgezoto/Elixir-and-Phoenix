@@ -1,6 +1,6 @@
 defmodule Discuss.CommentsChannel do
   use Discuss.Web, :channel
-  alias Discuss.Topic
+  alias Discuss.{Topic, Comments}
 
   #To authorize the socket to join a topic, we return {:ok, socket} or {:ok, reply, socket}.
   #"topic:subtopic"
@@ -19,17 +19,16 @@ defmodule Discuss.CommentsChannel do
     IO.puts("\n\ndef join/3 +++++++++++")
     topic_id = String.to_integer(topic_id)
     topic = Repo.get(Topic, topic_id)
-    socket = assign(socket, :topic, topic)
     IO.inspect(socket)
 
-    {:ok, %{my_header: "my_reply"}, socket}
+    {:ok, %{my_header: "my_reply"}, assign(socket, :topic, topic)}
   end
 
-  def handle_in(name, message, socket) do
+  def handle_in(name, %{"content" => content}, socket) do
     IO.puts("\n\ndef handle_in(name, message, socket)+++++++++++")
     #broadcast! socket, "new_msg", %{body: body}
     IO.puts(name)
-    IO.inspect(message)
+    IO.inspect(content)
     IO.inspect(socket)
 
     {:reply, :ok, socket}
