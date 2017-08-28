@@ -1,6 +1,6 @@
 defmodule Discuss.TopicController do
   use Discuss.Web, :controller
-  alias Discuss.Topic
+  alias Discuss.{Topic, Comment}
 
   #Flow through the RequireAuth plug prior to these actions using the guard clause
   plug Discuss.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete]
@@ -60,7 +60,18 @@ defmodule Discuss.TopicController do
     topic = Repo.get(Topic, topic_id)
 
     if topic do
-      render conn, "show.html", topic: topic
+      #Fetches all entries from the data store matching the given query
+      # Create a query
+      query = from c in "comments",
+                where: c.topic_id == ^String.to_integer(topic_id),
+                select: c.content
+
+      # Send the query to the repository
+      comments = Repo.all(query)
+      IO.puts("def show+++")
+      IO.inspect(comments)
+
+      render conn, "show.html", topic: topic, comments: comments
     else
       conn
       |> put_flash(:info, "You cannot view that")

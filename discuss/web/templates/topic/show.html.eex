@@ -1,31 +1,32 @@
-<h5>Topics</h5>
+<ul class="collection">
+  <li class="collection-item">
+
+    <%= if @conn.assigns.user do %>
+      <%= if @conn.assigns.user.id == @topic.user_id do %>
+        <h5><%= @topic.title %></h5>
+
+        <div class="right">
+          <%= link "Edit", to: topic_path(@conn, :edit, @topic) %>
+          <%= link "Delete", to: topic_path(@conn, :delete, @topic), method: :delete %>
+        </div>
+      <% end %>
+    <% end %>
+
+  </li>
+</ul>
 
 <ul class="collection">
+  <%= for comment <- @comments do %>
     <li class="collection-item">
-      <h5><%= @topic.title %></h5>
-
-      <div class="input-field">
-        <textarea class="materialize-textarea"></textarea>
-        <button class="btn">Add Comment</button>
-      </div>
-
-      <script>
-        document.addEventListener("DOMContentLoaded", function() {
-          window.createSocket(<%= @topic.id %>)
-        });
-      </script>
-
-      <%= if @conn.assigns.user do %>
-        <%= if @conn.assigns.user.id == @topic.user_id do %>
-          <div class="right">
-            <%= link "Edit", to: topic_path(@conn, :edit, @topic) %>
-            <%= link "Delete", to: topic_path(@conn, :delete, @topic), method: :delete %>
-          </div>
-        <% end %>
-      <% end %>
-
+      <%= comment %>
     </li>
+  <% end %>
 </ul>
+
+<div class="input-field">
+  <textarea class="materialize-textarea"></textarea>
+  <button class="btn">Add Comment</button>
+</div>
 
 <div class="fixed-action-btn">
   <%= link to: topic_path(@conn, :new), class: "btn-floating btn-large waves-effect waves-light red" do %>
@@ -33,3 +34,9 @@
   <% end %>
  </a>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    window.createSocket(<%= @topic.id %>)
+  });
+</script>
