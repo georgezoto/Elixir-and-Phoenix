@@ -10,13 +10,16 @@
   <% end %>
 <% end %>
 
-<ul class="collection">
-  <%= for comment <- @comments do %>
-    <li class="collection-item">
-      <%= comment %>
-    </li>
-  <% end %>
-</ul>
+
+<div id="div_comments">
+  <ul class="collection">
+    <%= for comment <- @comments do %>
+      <li class="collection-item">
+        <%= comment %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
 <div class="input-field">
   <textarea class="materialize-textarea"></textarea>

@@ -26,18 +26,21 @@ defmodule Discuss.CommentsChannel do
 
   def handle_in(name, %{"content" => content}, socket) do
     IO.puts("\n\ndef handle_in(name, message, socket)+++++++++++")
-    IO.inspect(socket)
+    IO.inspect(name)
+    #IO.inspect(socket)
     topic = socket.assigns.topic
-    IO.inspect(topic)
+    #IO.inspect(topic)
 
     changeset = topic
       |> build_assoc(:comments)
       |> Comment.changeset(%{content: content})
-    IO.inspect(changeset)
+    #IO.inspect(changeset)
 
     case Repo.insert(changeset) do
       {:ok, comment} ->
-        #broadcast! socket, "new_msg", %{body: body}
+        broadcast! socket, 'new_comment', %{content: content}
+        IO.inspect(socket)
+
         {:reply, :ok, socket}
       {:error, _reason} ->
         {:reply, {:error, %{errors: changeset}}, socket}

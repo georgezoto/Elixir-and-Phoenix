@@ -64,7 +64,9 @@ document.querySelector('button').addEventListener('click', function() {
 })*/
 
 const createSocket = (topicId) => {
+  let messagesContainer = document.querySelector("#div_comments")
   let channel = socket.channel(`comments:${topicId}`, {})
+
   channel.join()
     .receive("ok", resp => { console.log("Joined successfully", resp) })
     .receive("error", resp => { console.log("Unable to join", resp) })
@@ -74,6 +76,11 @@ const createSocket = (topicId) => {
     channel.push('comment:add', { content: content });
     document.querySelector('textarea').value = ""
   });
+
+  channel.on('new_comment:add', payload => {
+    console.log("channel.on('new_comment', payload...", payload)
+  })
+
 }
 
 window.createSocket = createSocket;
