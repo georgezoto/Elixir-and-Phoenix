@@ -12,7 +12,7 @@
 
 
 <div id="div_comments">
-  <ul class="collection">
+  <ul id="ul_comments" class="collection">
     <%= for comment <- @comments do %>
       <li class="collection-item">
         <%= comment %>

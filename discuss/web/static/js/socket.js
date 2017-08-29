@@ -64,7 +64,7 @@ document.querySelector('button').addEventListener('click', function() {
 })*/
 
 const createSocket = (topicId) => {
-  let messagesContainer = document.querySelector("#div_comments")
+  let messagesContainer = document.querySelector("#ul_comments")
   let channel = socket.channel(`comments:${topicId}`, {})
 
   channel.join()
@@ -74,12 +74,18 @@ const createSocket = (topicId) => {
   document.querySelector('button').addEventListener('click', () => {
     const content = document.querySelector('textarea').value;
     channel.push('comment:add', { content: content });
+    console.log("channel.push...content",content)
     document.querySelector('textarea').value = ""
   });
 
-  channel.on('new_comment:add', payload => {
+  channel.on("new_comment", payload => {
     console.log("channel.on('new_comment', payload...", payload)
-  })
+    let messageItem = document.createElement("li");
+    messageItem.className = "collection-item";
+    //messageItem.innerText = `[${Date()}] ${payload.content}`
+    messageItem.innerText = payload.content
+    messagesContainer.appendChild(messageItem)
+  });
 
 }
 
