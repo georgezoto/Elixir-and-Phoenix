@@ -30,7 +30,7 @@ defmodule Discuss.CommentsChannel do
     IO.inspect(topic)
 
     changeset = topic
-      |> build_assoc(:comments)
+      |> build_assoc(:comments, user_id: topic.user_id)
       |> Comment.changeset(%{content: content})
     IO.inspect(changeset)
 

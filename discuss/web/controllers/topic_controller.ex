@@ -53,9 +53,6 @@ defmodule Discuss.TopicController do
   end
 
   def show(conn, %{"id" => topic_id}) do
-    IO.inspect("show(conn, %{id => topic_id})")
-    IO.inspect(topic_id)
-
     #Fetches a single struct from the data store where the primary key matches the given id.
     topic = Repo.get(Topic, topic_id)
 
