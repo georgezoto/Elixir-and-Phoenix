@@ -16,7 +16,7 @@
   <ul id="ul_comments" class="collection">
     <%= for {content, user_id, inserted_at} <- @comments do %>
       <li class="collection-item">
-        <%= [content, user_id, inserted_at] %>
+        <%= inspect {content, user_id, inserted_at} %>
       </li>
     <% end %>
   </ul>

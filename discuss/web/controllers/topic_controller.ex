@@ -61,7 +61,7 @@ defmodule Discuss.TopicController do
       # Create a query
       query = from c in "comments",
                 where: c.topic_id == ^String.to_integer(topic_id),
-                select: [c.content, c.user_id, c.inserted_at]
+                select: {c.content, c.user_id, fragment("date_trunc('day', ?)", field(c, :inserted_at))}
 
       IO.inspect(query)
       # Send the query to the repository
