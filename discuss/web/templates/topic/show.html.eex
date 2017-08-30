@@ -14,9 +14,9 @@
 
 <div id="div_comments">
   <ul id="ul_comments" class="collection">
-    <%= for comment <- @comments do %>
+    <%= for {content, user_id, inserted_at} <- @comments do %>
       <li class="collection-item">
-        <%= comment %>
+        <%= [content, user_id, inserted_at] %>
       </li>
     <% end %>
   </ul>
