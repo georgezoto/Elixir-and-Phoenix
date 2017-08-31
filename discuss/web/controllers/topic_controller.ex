@@ -61,12 +61,26 @@ defmodule Discuss.TopicController do
       # Create a query
       query = from c in "comments",
                 where: c.topic_id == ^String.to_integer(topic_id),
-                select: {c.content, c.user_id, fragment("date_trunc('day', ?)", field(c, :inserted_at))}
+                select: {c.content, c.user_id, c.inserted_at}
+                #limit: 3
+                #select: {c.content, c.user_id, fragment("date_trunc('day', ?)", field(c, :inserted_at))}
 
       IO.inspect(query)
       # Send the query to the repository
-      comments = Repo.all(query)
+      results = Repo.all(query)
       IO.puts("def show+++")
+      comments = for {content, user_id, inserted_at} <- results do
+        {{year, month, day}, {hours, minutes, seconds, _}} = inserted_at
+        inserted_at = {{year, month, day}, {hours, minutes, seconds}}
+        {:ok, datetime} = NaiveDateTime.from_erl(inserted_at)
+        {content, user_id, NaiveDateTime.to_string(datetime)}
+      end
+      #+References
+      #https://hexdocs.pm/ecto/Ecto.Query.html
+      #https://hexdocs.pm/ecto/Ecto.Query.API.html#fragment/1
+      #https://stackoverflow.com/questions/42939450/elixir-converting-datetime-to-string
+      #https://elixirforum.com/t/how-to-convert-db-timestamp-to-naivedatetime/6146
+      #https://hexdocs.pm/elixir/NaiveDateTime.html#to_string/1
       IO.inspect(comments)
 
       render conn, "show.html", topic: topic, comments: comments
