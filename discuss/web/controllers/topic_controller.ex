@@ -1,6 +1,6 @@
 defmodule Discuss.TopicController do
   use Discuss.Web, :controller
-  alias Discuss.{Topic, Comment}
+  alias Discuss.{User, Topic, Comment}
 
   #Flow through the RequireAuth plug prior to these actions using the guard clause
   plug Discuss.Plugs.RequireAuth when action in [:new, :create, :edit, :update, :delete]
@@ -73,6 +73,20 @@ defmodule Discuss.TopicController do
         {{year, month, day}, {hours, minutes, seconds, _}} = inserted_at
         inserted_at = {{year, month, day}, {hours, minutes, seconds}}
         {:ok, datetime} = NaiveDateTime.from_erl(inserted_at)
+        #user_id_final = case user_id do
+        #  nil -> "Anonymous"
+        #  _   -> user_id
+        #end
+        if user_id == nil do
+          user_id = "Anonymous"
+        else
+          user = Repo.get(User, user_id)
+          if user do
+            user_id = user.email
+          else
+            user_id = "Anonymous"
+          end
+        end
         {content, user_id, NaiveDateTime.to_string(datetime)}
       end
       #+References
