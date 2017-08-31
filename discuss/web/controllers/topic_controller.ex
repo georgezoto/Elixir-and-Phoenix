@@ -92,7 +92,7 @@ defmodule Discuss.TopicController do
       #https://stackoverflow.com/questions/42939450/elixir-converting-datetime-to-string
       #https://elixirforum.com/t/how-to-convert-db-timestamp-to-naivedatetime/6146
       #https://hexdocs.pm/elixir/NaiveDateTime.html#to_string/1
-      IO.inspect(comments)
+      #IO.inspect(comments)
 
       render conn, "show.html", topic: topic, comments: comments
     else

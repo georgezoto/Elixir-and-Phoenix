@@ -1,6 +1,6 @@
 defmodule Discuss.CommentsChannel do
   use Discuss.Web, :channel
-  alias Discuss.{Topic, Comment}
+  alias Discuss.{User, Topic, Comment}
 
   #To authorize the socket to join a topic, we return {:ok, socket} or {:ok, reply, socket}.
   #"topic:subtopic"
@@ -24,10 +24,20 @@ defmodule Discuss.CommentsChannel do
 
   def handle_in(name, %{"content" => content}, socket) do
     IO.puts("\n\ndef handle_in(name, message, socket)+++++++++++")
-    #IO.inspect(name)
+    IO.inspect(socket)
     #IO.inspect(content)
     topic = socket.assigns.topic
-    IO.inspect(topic)
+
+    user_id = socket.assigns.topic.user_id
+    #Extract comment's author email if available
+    user_id = case user_id do
+      nil -> "Anonymous"
+      _   -> case user = Repo.get(User, user_id) do
+               nil -> "Anonymous"
+               _   -> user.email
+             end
+    end
+    IO.inspect(user_id)
 
     changeset = topic
       |> build_assoc(:comments, user_id: topic.user_id)
