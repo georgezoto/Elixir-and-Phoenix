@@ -13,13 +13,17 @@
 
 
 <div id="div_comments">
-  <ul id="ul_comments" class="collection">
     <%= for {content, user_id, inserted_at} <- @comments do %>
-      <li class="collection-item">
-        <%= [content, " ", user_id, " ",inserted_at] %>
-      </li>
+        <div>
+        <div class="left">
+        <%= content %>
+        </div>
+        <div class="right">
+          <%= [user_id, " ",inserted_at] %>
+        </div>
+        </div>
+        <br>
     <% end %>
-  </ul>
 </div>
 
 <%= if @conn.assigns.user do %>
