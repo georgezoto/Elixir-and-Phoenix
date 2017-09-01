@@ -82,7 +82,7 @@ const createSocket = (topicId) => {
     console.log("channel.on('new_comment', payload...", payload)
     let messageItem = document.createElement("div");
     //messageItem.innerText = `[${Date()}] ${payload.content}`
-    messageItem.innerHTML = `${payload.content} ${new Date().toLocaleDateString("en-US", {
+    messageItem.innerHTML = `${payload.content} &nbsp &nbsp &nbsp ${new Date().toLocaleDateString("en-US", {
     weekday: "long", year: "numeric", month: "short",
     day: "numeric", hour: "2-digit", minute: "2-digit"})}`
     messagesContainer.appendChild(messageItem)
