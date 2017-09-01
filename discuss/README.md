@@ -19,6 +19,6 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
 
-A sample application where a user can login and logout using OAuth (Open Authorization) as well as create, edit, update or delete a topic:
+A sample application where a user can login and logout using OAuth (Open Authorization) as well as create, edit, update or delete a topic as well as create comments in a topic with live real-time updates:
 
 ![alt text](../images/Discuss-Application.png)
