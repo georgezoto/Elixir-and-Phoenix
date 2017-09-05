@@ -1,6 +1,6 @@
 # Discuss
 
-A sample application where a user can login and logout using OAuth (Open Authorization) and create, edit, update or delete a topic as well as create comments on a topic with live real-time updates:
+A sample application where a user can login and logout using OAuth (Open Authorization) and create, edit, update or delete a topic as well as create comments related to a topic with live real-time updates:
 
 ![alt text](../images/Discuss-Application.png)
 
