@@ -15,9 +15,13 @@ defmodule Discuss.Repo.Migrations.AddComments do
 end
 
 #select * from comments;
-# id | content | user_id | topic_id | inserted_at | updated_at
-#----+---------+---------+----------+-------------+------------
-#(0 rows)
+#id |          content           | user_id | topic_id |        inserted_at         |         updated_at
+#----+----------------------------+---------+----------+----------------------------+----------------------------
+#  1 | A short comment            |       1 |        1 | 2017-09-05 13:43:58.154078 | 2017-09-05 13:43:58.154087
+#  2 | Let's try another comment! |       1 |        1 | 2017-09-05 13:45:57.911773 | 2017-09-05 13:45:57.91178
+#  3 | Look's good so far.        |       1 |        1 | 2017-09-05 13:47:06.696012 | 2017-09-05 13:47:06.69602
+#(3 rows)
+
 
 #\d comments;
 #                                      Table "public.comments"
