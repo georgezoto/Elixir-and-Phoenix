@@ -33,6 +33,7 @@ defmodule Discuss.Router do
     #route called when a users wants to sign out
     get "/signout", AuthController, :signout
 
+    #please refer to oauth provider settings for request and callback details!
     #route called when a user wants to authenticate with github
     get "/:provider", AuthController, :request
     #route called when a user is sent back from github to our application
