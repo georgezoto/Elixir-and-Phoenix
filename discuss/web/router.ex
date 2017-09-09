@@ -34,7 +34,7 @@ defmodule Discuss.Router do
     get "/signout", AuthController, :signout
 
     #please refer to oauth provider settings for request and callback details!
-    #E.g. for GitHub update "Homepage URL" and "Authorization callback URL" accordingly. 
+    #For example in case of GitHub, update "Homepage URL" and "Authorization callback URL" accordingly. 
     #route called when a user wants to authenticate with github
     get "/:provider", AuthController, :request
     #route called when a user is sent back from github to our application
