@@ -27,7 +27,7 @@
 </div>
 
 <%= if @conn.assigns.user do %>
-  <%= if @conn.assigns.user.id == @topic.user_id do %>
+  <!--%= if @conn.assigns.user.id == @topic.user_id do %-->
     <div class="input-field">
       <textarea class="materialize-textarea"></textarea>
       <%= submit "Add Comment", class: "btn btn-primary" %>
@@ -38,7 +38,7 @@
         window.createSocket(<%= @topic.id %>)
       });
     </script>
-  <% end %>
+  <!--% end %-->
 <% end %>
 
 <div class="fixed-action-btn">
