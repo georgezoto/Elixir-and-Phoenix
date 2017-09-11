@@ -27,6 +27,7 @@
 </div>
 
 <%= if @conn.assigns.user do %>
+  <!-- Bug found that makes the comment author same as the topic author-->
   <!--%= if @conn.assigns.user.id == @topic.user_id do %-->
     <div class="input-field">
       <textarea class="materialize-textarea"></textarea>
