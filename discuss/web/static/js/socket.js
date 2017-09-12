@@ -63,6 +63,7 @@ document.querySelector('button').addEventListener('click', function() {
   channel.push('comments:hello', { hi: 'there!' });
 })*/
 
+//Bug found that makes the comment author same as the topic author
 const createSocket = (topicId) => {
   let messagesContainer = document.querySelector("#div_comments")
   let channel = socket.channel(`comments:${topicId}`, {})
