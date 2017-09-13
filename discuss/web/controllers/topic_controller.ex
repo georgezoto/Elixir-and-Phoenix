@@ -52,6 +52,7 @@ defmodule Discuss.TopicController do
     end
   end
 
+  #Bug found that makes the comment author same as the topic author
   def show(conn, %{"id" => topic_id}) do
     #Fetches a single struct from the data store where the primary key matches the given id.
     topic = Repo.get(Topic, topic_id)
