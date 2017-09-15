@@ -28,6 +28,7 @@ defmodule Discuss.CommentsChannel do
     #IO.inspect(content)
     topic = socket.assigns.topic
 
+    #Bug found here: Using the user_id of the topic shown instead of the user_id of the user logged in.
     user_id = socket.assigns.topic.user_id
     #Extract comment's author email if available
     user_id = case user_id do
