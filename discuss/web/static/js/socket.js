@@ -67,6 +67,7 @@ document.querySelector('button').addEventListener('click', function() {
 //Need to find a way to access/pass the current user in from comments_channel to javascript
 //Unexpected token: (%{"topic_id" => topicId, "user_id" => user_id})
 const createSocket = (topicId) => {
+  console.log("socket.js topicId",topicId)
   let messagesContainer = document.querySelector("#div_comments")
   let channel = socket.channel(`comments:${topicId}`, {})
 
