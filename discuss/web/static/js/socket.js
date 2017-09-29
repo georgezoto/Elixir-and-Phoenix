@@ -66,8 +66,9 @@ document.querySelector('button').addEventListener('click', function() {
 //Bug found that makes the comment author same as the topic author
 //Need to find a way to access/pass the current user in from comments_channel to javascript
 //Unexpected token: (%{"topic_id" => topicId, "user_id" => user_id})
-const createSocket = (topicId) => {
+const createSocket = (topicId, userId) => {
   console.log("socket.js topicId",topicId)
+  console.log("socket.js userId",userId)
   let messagesContainer = document.querySelector("#div_comments")
   let channel = socket.channel(`comments:${topicId}`, {})
 
