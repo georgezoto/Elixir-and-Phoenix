@@ -22,27 +22,30 @@ defmodule Discuss.CommentsChannel do
     {:ok, %{my_header: "my_reply"}, assign(socket, :topic, topic)}
   end
 
-  def handle_in(name, %{"content" => content}, socket) do
+  def handle_in(name, %{"content" => content, "userId" => user_id}, socket) do #Bug fixed here
     IO.puts("\n\ndef handle_in(name, message, socket)+++++++++++")
-    IO.inspect(socket)
-    #IO.inspect(content)
+    #IO.inspect(socket)
+    IO.puts("Line 28")
+    IO.inspect(user_id)
     topic = socket.assigns.topic
 
     #Bug found here: Using the user_id of the topic shown instead of the user_id of the user logged in.
     #Need conn object here and conn.assigns.user.id
-    user_id = socket.assigns.topic.user_id
+    #user_id = socket.assigns.topic.user_id #Bug fixed here
+
     #Extract comment's author email if available
-    user_id = case user_id do
+    user_email = case user_id do
       nil -> "Anonymous"
       _   -> case user = Repo.get(User, user_id) do
                nil -> "Anonymous"
                _   -> user.email
              end
     end
+    IO.puts("Line 44")
     IO.inspect(user_id)
 
     changeset = topic
-      |> build_assoc(:comments, user_id: topic.user_id)
+      |> build_assoc(:comments, user_id: user_id) #Bug fixed here
       |> Comment.changeset(%{content: content})
     IO.inspect(changeset)
 
