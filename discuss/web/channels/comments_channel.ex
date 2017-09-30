@@ -51,7 +51,7 @@ defmodule Discuss.CommentsChannel do
 
     case Repo.insert(changeset) do
       {:ok, comment} ->
-        broadcast! socket, "new_comment", %{content: content}
+        broadcast! socket, "new_comment", %{content: content, user_email: user_email}
         #IO.inspect(socket)
 
         {:reply, :ok, socket}
