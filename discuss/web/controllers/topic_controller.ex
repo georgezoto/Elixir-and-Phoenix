@@ -62,7 +62,7 @@ defmodule Discuss.TopicController do
       # Create a query
       query = from c in "comments",
                 where: c.topic_id == ^String.to_integer(topic_id),
-                select: {c.content, c.user_id, c.inserted_at}
+                select: {c.content, c.user_id, fragment("((? AT TIME ZONE 'UTC') AT TIME ZONE 'EST') AS inserted_at", field(c, :inserted_at))}
                 #limit: 3
                 #select: {c.content, c.user_id, fragment("date_trunc('day', ?)", field(c, :inserted_at))}
 
@@ -71,6 +71,7 @@ defmodule Discuss.TopicController do
       results = Repo.all(query)
       IO.puts("def show+++")
       comments = for {content, user_id, inserted_at} <- results do
+        IO.inspect(inserted_at)
         {{year, month, day}, {hours, minutes, seconds, _}} = inserted_at
         inserted_at = {{year, month, day}, {hours, minutes, seconds}}
         {:ok, datetime} = NaiveDateTime.from_erl(inserted_at)

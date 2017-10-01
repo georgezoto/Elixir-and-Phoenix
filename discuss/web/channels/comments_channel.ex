@@ -42,7 +42,7 @@ defmodule Discuss.CommentsChannel do
              end
     end
     IO.puts("Line 44")
-    IO.inspect(user_id)
+    IO.inspect(content)
 
     changeset = topic
       |> build_assoc(:comments, user_id: user_id) #Bug fixed here
