@@ -87,6 +87,7 @@ defmodule Discuss.TopicController do
         #Return tuple of comment content, author email, comment datetime
         {content, user_id, NaiveDateTime.to_string(datetime)}
       end
+      #IO.inspect(comments)
 
       #+References
       #https://hexdocs.pm/ecto/Ecto.Query.html
@@ -97,7 +98,8 @@ defmodule Discuss.TopicController do
 
       #Time zones in PostgreSQL, Elixir and Phoenix
       #https://www.amberbit.com/blog/2017/8/3/time-zones-in-postgresql-elixir-and-phoenix/
-      #IO.inspect(comments)
+      #The need for timezone awareness
+      #http://www.creativedeletion.com/2015/05/10/the-need-timezones.html
 
       render conn, "show.html", topic: topic, comments: comments
     else
