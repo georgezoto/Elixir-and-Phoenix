@@ -17,6 +17,7 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
 
 ## Learn more
 
+  * Live Discuss App: https://quiet-lake-82310.herokuapp.com
   * Official website: http://www.phoenixframework.org/
   * Guides: http://phoenixframework.org/docs/overview
   * Docs: https://hexdocs.pm/phoenix
