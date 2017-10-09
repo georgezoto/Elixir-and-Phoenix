@@ -100,7 +100,11 @@ defmodule Discuss.TopicController do
       #https://www.amberbit.com/blog/2017/8/3/time-zones-in-postgresql-elixir-and-phoenix/
       #The need for timezone awareness
       #http://www.creativedeletion.com/2015/05/10/the-need-timezones.html
-
+      #Determine a User's Timezone
+      #https://stackoverflow.com/questions/13/determine-a-users-timezone
+      #Here is a robust JavaScript solution to determine the time zone the browser is in
+      #https://bitbucket.org/pellepim/jstimezonedetect
+      
       render conn, "show.html", topic: topic, comments: comments
     else
       conn
